@@ -17,7 +17,7 @@ def bmr_app():
         height = form_data["height"]
         age = form_data["age"]
         activity = form_data["activity"]
-    if bmr == "man":
+    if bmr == "male":
         malebmr = 66 + (6.3 * int(weight )) + (12.9 * int(height)) - (6.8 * int(age))
 #creating a variable that would determine how many calories someone is currently expending in a day.
         if activity=="unactive":
@@ -33,14 +33,12 @@ def bmr_app():
         elif activity=="very active":
           calories_needed = malebmr * 1.9
         else:
-            if bmr == "woman" or "Woman":
+            if bmr == "female":
                 femalebmr = 655 + (4.3 * int(weight)) + (4.7 * int(height)) - (4.7 * int(age))
             if activity=="unactive":
                 calories_needed= femalebmr * 1.2
             elif  activity=="lightly active":
                 calories_needed = femalebmr * 1.375
-            elif activity=="moderately active":
-                calories_needed  = femalebmr * 1.375
             elif activity=="moderately active":
                 calories_needed = femalebmr * 1.55
             elif activity=="active":
