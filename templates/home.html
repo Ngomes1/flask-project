@@ -1,0 +1,33 @@
+<h1>
+    <center>
+    <title>Home page</title>
+    </center>
+</h1>
+
+<p>
+    <body>
+            If you ever wanted to lose weight or maybe even gain weight?The key to solving it by subtracting or adding 500-1000 calories from your standard caloric burning rate, leading to a loss or gain of 1-2lb per week! If you would to know what your standard caloric intake should be then fill in the blanks below!
+    </body>
+</p>
+
+
+<form action="/data" method = "POST">
+    <p>What is your gender?</p>
+        <label>
+        <input type="radio" name="gender" value="male" checked>Male</label>
+      <br>
+      <label>
+        <input type="radio" name="gender" value="female">Female</label> 
+    <p>What is current weight: <input type = "number" name = "weight" /></p>
+    <p>What is your height in inches : <input type = "number" name = "height" /></p>
+    <p>Please state your age:<input type = "number" name = "age" </p>
+    <label for="activity">Please chose the level of your activity: unactive, 1-3 days of light workouts lightly active, active for moderate working out 1-4 days a week, active for 3-5 days of working out, and 5-7 days of rigourous working out select very active </label>
+    <select name="activity" id="activity">
+        <option value="unactive">Unactive</option>
+        <option value="lightly active">Lightly Active</option>
+        <option value="moderately active">Moderately Active</option>
+        <option value="active">Active</option>
+        <option value="very active">Very Active</option>
+    </select>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
