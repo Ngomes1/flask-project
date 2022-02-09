@@ -1,10 +1,11 @@
 from flask import Flask,render_template,request
+import sqlite3
  
 app = Flask(__name__)
  
-@app.route('/form')
+@app.route('/home')
 def form():
-    return render_template('form.html')
+    return render_template('home.html')
  
 @app.route('/data/', methods = ['POST', 'GET'])
 def bmr_app():
@@ -45,7 +46,24 @@ def bmr_app():
                 calories_needed  = femalebmr * 1.725
             elif activity=="very active":
                 calories_needed = femalebmr * 1.9
-        return render_template('data1.html',form_data = round(calories_needed, 2))
+        return render_template('caloric_esitmate.html',form_data = round(calories_needed, 2))
+
+@app.route('/data',method=["GET","POST"])
+def users():
+    if request.method == 'POST':
+        form_data = request.form
+        conn = sqlite3.connect("bmr.db")
+        c = conn.cursor()
+    
+        ssql = "INSERT INTO users (first,last,calories,weight,goal,goalprogress,timestamp)VALUES('"
+        ssql = ssql + form_data["firstname"] + "', '" + form_data["lastname"] + "', '" + form_data["calories"] +"', '" + form_data["weight"] + "', '" + form_data["goal"] + "', '" + form_data["goal_progress"] + "', '" + form_data["timestamp"] +"')"
+        c.execute(ssql)
+        conn.commit()
+        c.close()
+        conn.close()
+    return render_template('tracker.html',form_data = ssql)
+
+
  
  
 app.run(host='localhost', port=5000)
