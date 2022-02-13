@@ -7,7 +7,7 @@ app = Flask(__name__)
 def form():
     return render_template('home.html')
  
-@app.route('/data/', methods = ['POST', 'GET'])
+@app.route('/data', methods = ['POST', 'GET'])
 def bmr_app():
     if request.method == 'GET':
         return f"The URL /data is accessed directly. Try going to '/form' to submit form"
@@ -46,10 +46,13 @@ def bmr_app():
                 calories_needed  = femalebmr * 1.725
             elif activity=="very active":
                 calories_needed = femalebmr * 1.9
-        return render_template('caloric_esitmate.html',form_data = round(calories_needed, 2))
+        return render_template('caloric_estimate.html',form_data = round(calories_needed, 2))
 
-@app.route('/data',method=["GET","POST"])
+@app.route('/tracker',methods=['GET','POST'])
 def users():
+    if request.method == 'GET':
+      return render_template("tracker.html")
+
     if request.method == 'POST':
         form_data = request.form
         conn = sqlite3.connect("bmr.db")
@@ -61,7 +64,16 @@ def users():
         conn.commit()
         c.close()
         conn.close()
-    return render_template('tracker.html',form_data = ssql)
+        print("Inside post " + ssql, flush=True)
+        #data1 = form_data.copy()
+        ssql = "SELECT first,last,calories,weight,goal,goalprogress,timestamp FROM users ORDER BY timestamp"
+        conn = sqlite3.connect("bmr.db")
+        c = conn.cursor()
+        c.execute(ssql)
+        rows = c.fetchall()
+       
+
+        return render_template('data.html', form_data = rows)
 
 
  
