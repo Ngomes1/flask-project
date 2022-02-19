@@ -1,4 +1,26 @@
-{% for key,value in form_data.items() %}
-<h2> {{key}}</h2>
-<p> {{value}}</p>
-{% endfor %}
+<table id="table" >
+    <thead>
+      <tr>
+        <th>first</th>
+        <th>last</th>
+        <th>calories</th>
+        <th>weight</th>
+        <th>goal</th>
+        <th>goalprogress</th>
+        <th>timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in form_data %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td> {{row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <center><td>{{ row[5] }}</td></center>
+          <td>{{ row[6] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
